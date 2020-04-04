@@ -24,11 +24,10 @@ class ProjectList {
     for (const projectItem of projectItems) {
       this.projects.push(new ProjectItem(projectItem.id));
     }
+  }
 
-    switchProject(projectId) { 
-        this.projects = this.projects.filter((project) => project.id !== projectId);
-    }
-
+  switchProject(projectId) {
+    this.projects = this.projects.filter((project) => project.id !== projectId);
   }
 }
 
