@@ -13,7 +13,7 @@ class ProjectItem {
     console.log(this.id);
     const projectItemElement = document.getElementById(this.id);
     const switchBtn = projectItemElement.querySelectorAll("button")[1];
-    switchBtn.addEventListener("click");
+    // switchBtn.addEventListener("click");
   }
 }
 
@@ -30,6 +30,10 @@ class ProjectList {
     this.switchHandler = switchHandlerFunction;
   }
 
+  addProject() {
+    console.log(this);
+  }
+
   switchProject(projectId) {
     this.projects = this.projects.filter((project) => project.id !== projectId);
   }
@@ -39,6 +43,9 @@ class App {
   static init() {
     const activeProjectsList = new ProjectList("active");
     const finishedProjectsList = new ProjectList("finished");
+    activeProjectsList.setSwitchHandlerFunction(
+      finishedProjectsList.addProject.bind(finishedProjectsList)
+    );
   }
 }
 
