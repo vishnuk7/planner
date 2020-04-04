@@ -26,6 +26,10 @@ class ProjectList {
     }
   }
 
+  setSwitchHandlerFunction(switchHandlerFunction) {
+    this.switchHandler = switchHandlerFunction;
+  }
+
   switchProject(projectId) {
     this.projects = this.projects.filter((project) => project.id !== projectId);
   }
