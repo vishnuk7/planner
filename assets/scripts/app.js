@@ -3,7 +3,17 @@ class ToolTip {}
 class ProjectItem {
   constructor(id) {
     this.id = id;
-    console.log(id);
+    this.connectMoreInfoButton();
+    this.connectSwitchButton();
+  }
+
+  connectMoreInfoButton() {}
+
+  connectSwitchButton() {
+    console.log(this.id);
+    const projectItemElement = document.getElementById(this.id);
+    const switchBtn = projectItemElement.querySelectorAll("button")[1];
+    switchBtn.addEventListener("click");
   }
 }
 
