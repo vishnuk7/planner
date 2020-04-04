@@ -1,11 +1,19 @@
 class ToolTip {}
 
-class ProjectItem {}
+class ProjectItem {
+  constructor(id) {
+    this.id = id;
+    console.log(id);
+  }
+}
 
 class ProjectList {
+  projects = [];
   constructor(type) {
-    const projectItem = document.querySelectorAll(`#${type}-projects li`);
-    console.log(projectItem);
+    const projectItems = document.querySelectorAll(`#${type}-projects li`);
+    for (const projectItem of projectItems) {
+      this.projects.push(new ProjectItem(projectItem.id));
+    }
   }
 }
 
