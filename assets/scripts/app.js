@@ -18,13 +18,18 @@ class ProjectItem {
 
   connectMoreInfoButton() {}
 
-  connectSwitchButton() {
+  connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
     const switchBtn = projectItemElement.querySelectorAll("button")[1];
     switchBtn.addEventListener(
       "click",
       this.updateProjectListHandler.bind(null, this.id)
     );
+  }
+
+  update(updateProjectListFuction, type) {
+    this.updateProjectListHandler = updateProjectListFuction;
+    this.connectSwitchButton(type);
   }
 }
 
@@ -45,8 +50,10 @@ class ProjectList {
   }
 
   addProject(project) {
+    console.log(project);
     this.projects.push(project);
     DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
+    project.update(this.switchProject.bind(this), this.type);
   }
 
   switchProject(projectId) {
