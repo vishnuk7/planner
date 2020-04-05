@@ -31,7 +31,8 @@ class ProjectItem {
 class ProjectList {
   projects = [];
   constructor(type) {
-    const projectItems = document.querySelectorAll(`#${type}-projects li`);
+    this.type = type;
+    const projectItems = document.querySelectorAll(`#${this.type}-projects li`);
     for (const projectItem of projectItems) {
       this.projects.push(
         new ProjectItem(projectItem.id, this.switchProject.bind(this))
@@ -44,7 +45,8 @@ class ProjectList {
   }
 
   addProject(project) {
-    console.log(project);
+    this.projects.push(project);
+    DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
   }
 
   switchProject(projectId) {
