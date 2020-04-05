@@ -1,3 +1,11 @@
+class DOMHelper {
+  static moveElement(elementId, newDestinationSelector) {
+    const element = document.getElementById(elementId);
+    const destinationSelector = document.querySelector(newDestinationSelector);
+    destinationSelector.append(element);
+  }
+}
+
 class ToolTip {}
 
 class ProjectItem {
