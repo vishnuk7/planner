@@ -6,16 +6,17 @@ class ProjectItem {
     this.updateProjectListHandler = updateProjectListFuction;
     this.connectMoreInfoButton();
     this.connectSwitchButton();
-    console.log(this.updateProjectListHandler);
   }
 
   connectMoreInfoButton() {}
 
   connectSwitchButton() {
-    console.log(this.id);
     const projectItemElement = document.getElementById(this.id);
     const switchBtn = projectItemElement.querySelectorAll("button")[1];
-    switchBtn.addEventListener("click", this.updateProjectListHandler);
+    switchBtn.addEventListener(
+      "click",
+      this.updateProjectListHandler.bind(null, this.id)
+    );
   }
 }
 
@@ -34,8 +35,8 @@ class ProjectList {
     this.switchHandler = switchHandlerFunction;
   }
 
-  addProject() {
-    console.log(this);
+  addProject(project) {
+    console.log(project);
   }
 
   switchProject(projectId) {
