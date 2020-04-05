@@ -4,23 +4,31 @@ class DOMHelper {
     const destinationSelector = document.querySelector(newDestinationSelector);
     destinationSelector.append(element);
   }
+
+  static clearEventListener(element) {
+    const clonedElement = element.cloneNode(true);
+    element.replaceWith(clonedElement);
+    return clonedElement;
+  }
 }
 
 class ToolTip {}
 
 class ProjectItem {
-  constructor(id, updateProjectListFuction) {
+  constructor(id, updateProjectListFuction, type) {
     this.id = id;
     this.updateProjectListHandler = updateProjectListFuction;
     this.connectMoreInfoButton();
-    this.connectSwitchButton();
+    this.connectSwitchButton(type);
   }
 
   connectMoreInfoButton() {}
 
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
-    const switchBtn = projectItemElement.querySelectorAll("button")[1];
+    let switchBtn = projectItemElement.querySelectorAll("button")[1];
+    switchBtn = DOMHelper.clearEventListener(switchBtn);
+    switchBtn.textContent = type === "active" ? "Finish" : "Activate";
     switchBtn.addEventListener(
       "click",
       this.updateProjectListHandler.bind(null, this.id)
@@ -40,7 +48,11 @@ class ProjectList {
     const projectItems = document.querySelectorAll(`#${this.type}-projects li`);
     for (const projectItem of projectItems) {
       this.projects.push(
-        new ProjectItem(projectItem.id, this.switchProject.bind(this))
+        new ProjectItem(
+          projectItem.id,
+          this.switchProject.bind(this),
+          this.type
+        )
       );
     }
   }
