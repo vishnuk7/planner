@@ -14,7 +14,10 @@ class DOMHelper {
 
 class ToolTip {
   attach() {
-    console.log("yep it's me tooltop");
+    const toolTipElement = document.createElement("div");
+    toolTipElement.textContent = "Hehe";
+    toolTipElement.className = "card";
+    document.body.append(toolTipElement);
   }
 }
 
