@@ -13,6 +13,15 @@ class DOMHelper {
 }
 
 class ToolTip {
+  constructor(closeNotifierFunction) {
+    this.closeNotifier = closeNotifierFunction;
+  }
+
+  closeToolTip() {
+    this.detach();
+    this.closeNotifier();
+  }
+
   attach() {
     this.toolTipElement = document.createElement("div");
     this.toolTipElement.textContent = "Hehe";
@@ -28,6 +37,8 @@ class ToolTip {
 }
 
 class ProjectItem {
+  hasActiveToolTip = false;
+
   constructor(id, updateProjectListFuction, type) {
     this.id = id;
     this.updateProjectListHandler = updateProjectListFuction;
@@ -36,8 +47,10 @@ class ProjectItem {
   }
 
   showMoreInfoHandler() {
-    const tooltip = new ToolTip();
+    if (this.hasActiveToolTip) return;
+    const tooltip = new ToolTip(() => (this.hasActiveToolTip = false));
     tooltip.attach();
+    this.hasActiveToolTip = true;
   }
 
   connectMoreInfoButton() {
