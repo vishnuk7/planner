@@ -14,10 +14,16 @@ class DOMHelper {
 
 class ToolTip {
   attach() {
-    const toolTipElement = document.createElement("div");
-    toolTipElement.textContent = "Hehe";
-    toolTipElement.className = "card";
-    document.body.append(toolTipElement);
+    this.toolTipElement = document.createElement("div");
+    this.toolTipElement.textContent = "Hehe";
+    this.toolTipElement.className = "card";
+    document.body.append(this.toolTipElement);
+    this.toolTipElement.addEventListener("click", this.detach.bind(this));
+  }
+
+  detach() {
+    console.log(this.toolTipElement);
+    this.toolTipElement.remove();
   }
 }
 
