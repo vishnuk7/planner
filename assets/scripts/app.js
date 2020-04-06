@@ -12,7 +12,11 @@ class DOMHelper {
   }
 }
 
-class ToolTip {}
+class ToolTip {
+  attach() {
+    console.log("yep it's me tooltop");
+  }
+}
 
 class ProjectItem {
   constructor(id, updateProjectListFuction, type) {
@@ -22,7 +26,17 @@ class ProjectItem {
     this.connectSwitchButton(type);
   }
 
-  connectMoreInfoButton() {}
+  showMoreInfoHandler() {
+    const tooltip = new ToolTip();
+    tooltip.attach();
+  }
+
+  connectMoreInfoButton() {
+    const projectItemElement = document.getElementById(this.id);
+    let switchBtn = projectItemElement.querySelectorAll("button")[0];
+    console.log(switchBtn);
+    switchBtn.addEventListener("click", this.showMoreInfoHandler);
+  }
 
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
