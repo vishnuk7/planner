@@ -84,6 +84,7 @@ class ProjectItem {
     this.updateProjectListHandler = updateProjectListFuction;
     this.connectMoreInfoButton();
     this.connectSwitchButton(type);
+    this.connectDrag();
   }
 
   showMoreInfoHandler() {
@@ -97,6 +98,13 @@ class ProjectItem {
     );
     tooltip.attach();
     this.hasActiveToolTip = true;
+  }
+
+  connectDrag() {
+    document.getElementById(this.id).addEventListener("dragstart", (event) => {
+      event.dataTransfer.setData("text/plain", this.id);
+      event.dataTransfer.effectAllowed = "move";
+    });
   }
 
   connectMoreInfoButton() {
@@ -168,12 +176,12 @@ class App {
       activeProjectsList.addProject.bind(activeProjectsList)
     );
 
-    const timer = setTimeout(this.startAnalytics, 3000);
+    // const timer = setTimeout(this.startAnalytics, 3000);
 
-    const analyticsBtn = document.getElementById("analytics-btn");
-    analyticsBtn.addEventListener("click", () => {
-      clearTimeout(timer);
-    });
+    // const analyticsBtn = document.getElementById("analytics-btn");
+    // analyticsBtn.addEventListener("click", () => {
+    //   clearTimeout(timer);
+    // });
   }
 
   static startAnalytics() {
