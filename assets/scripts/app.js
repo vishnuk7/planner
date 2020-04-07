@@ -103,6 +103,8 @@ class ProjectItem {
   connectDrag() {
     document.getElementById(this.id).addEventListener("dragstart", (event) => {
       event.dataTransfer.setData("text/plain", this.id);
+      const data = event.dataTransfer.getData("text/plain");
+      console.log(data);
       event.dataTransfer.effectAllowed = "move";
     });
   }
@@ -164,9 +166,19 @@ class ProjectList {
     });
 
     list.addEventListener("dragleave", (event) => {
+      console.log(event.relatedTarget);
       if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== list) {
         list.parentElement.classList.remove("dropable");
       }
+    });
+
+    list.addEventListener("drop", (event) => {
+      const projectId = event.dataTransfer.getData("text/plain");
+      if (this.projects.find((p) => p.id === projectId)) {
+        return;
+      }
+      document.getElementById(projectId).querySelectorAll("button")[1].click();
+      list.parentElement.classList.remove("dropable");
     });
   }
 
