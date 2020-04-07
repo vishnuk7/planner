@@ -91,6 +91,10 @@ button:active {
   background: white;
 }
 
+.dropable {
+  background-color: lightgreen;
+}
+
 #active-projects {
   border: 1px solid #870099;
 }
