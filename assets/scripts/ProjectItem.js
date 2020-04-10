@@ -1,5 +1,5 @@
 import { DOMHelper } from "./DOMHelper.js";
-import { ToolTip } from "./ToolTip.js";
+// import { ToolTip } from "./ToolTip.js";
 
 export class ProjectItem {
   hasActiveToolTip = false;
@@ -16,13 +16,15 @@ export class ProjectItem {
     const projectElement = document.getElementById(this.id);
     const toolTipText = projectElement.dataset.extraInfo;
     if (this.hasActiveToolTip) return;
-    const tooltip = new ToolTip(
-      () => (this.hasActiveToolTip = false),
-      toolTipText,
-      this.id
-    );
-    tooltip.attach();
-    this.hasActiveToolTip = true;
+    import("./ToolTip.js").then((module) => {
+      const tooltip = new module.ToolTip(
+        () => (this.hasActiveToolTip = false),
+        toolTipText,
+        this.id
+      );
+      tooltip.attach();
+      this.hasActiveToolTip = true;
+    });
   }
 
   connectDrag() {
